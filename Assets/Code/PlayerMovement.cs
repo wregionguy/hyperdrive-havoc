@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 moveDir;
     public float moveSpeed;
     public float notGroundedPenalty;
+    public Vector3 rotate;
     public Rigidbody rb;
     public float jumpStrength;
     public float gravity;
@@ -51,38 +52,15 @@ public class PlayerMovement : MonoBehaviour
     private void BodyMovement()
     {
         // body movement
-        moveDir.x = Input.GetAxis("Horizontal");
         moveDir.z = Input.GetAxis("Vertical");
-
-        if (grounded == true)
-        {
-            rb.AddRelativeForce(moveSpeed * Time.deltaTime * moveDir, ForceMode.Impulse);
-        }
-        else
-        {
-            rb.AddRelativeForce(moveSpeed * notGroundedPenalty * Time.deltaTime * moveDir, ForceMode.Impulse);
-        }
-
-        // mouse input
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        rb.AddRelativeForce(moveSpeed * Time.deltaTime * moveDir, ForceMode.Impulse);
 
         // rotate body (yaw)
-        if (Mathf.Abs(mouseX) > 0f)
+        rotate.y = Input.GetAxis("Horizontal");
+        if (Mathf.Abs(rotate.y) > 0f)
         {
             // use rotateSpeed as sensitivity; multiply by Time.deltaTime for frame-rate independence
-            transform.Rotate(Vector3.up * (mouseX * rotateSpeed * Time.deltaTime));
-        }
-
-        // rotate camera (pitch) with clamping
-        if (cam != null)
-        {
-            // invert mouseY to match original intent (moving mouse up looks up)
-            cameraPitch -= mouseY * rotateSpeed * Time.deltaTime;
-            cameraPitch = Mathf.Clamp(cameraPitch, minClamp, maxClamp);
-
-            // apply only pitch locally to avoid messing with player's yaw
-            cam.localEulerAngles = new Vector3(cameraPitch, 0f, 0f);
+            transform.Rotate(Vector3.up * (rotate.y * rotateSpeed * Time.deltaTime));
         }
     }
 
@@ -94,17 +72,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
             }
-        }
-
-        // checks for sky vs ground linear dampening
-        if (grounded == true)
-        {
-            rb.linearDamping = maxDampening;
-        }
-        else
-        {
-            rb.linearDamping = minDampening;
-        }
+        }   
 
         // checks if player is allowed to jump
         if (Physics.Raycast(transform.position, -transform.up, out groundedHit, groundDistance))
