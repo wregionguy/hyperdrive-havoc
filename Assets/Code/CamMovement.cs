@@ -1,6 +1,5 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using static UnityEngine.GraphicsBuffer;
 
 public class CamMovement : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class CamMovement : MonoBehaviour
 
     private void Start()
     {
-        cam.position = new Vector3(0,0,0);   
+        cam.position = locationTarget.position;
     }
     // Update is called once per frame
     void Update()
@@ -22,6 +21,11 @@ public class CamMovement : MonoBehaviour
         c *= maxDistance;
         cam.position = locationTarget.position + c;
         cam.LookAt(player);
-        cam.position = Vector3.MoveTowards(cam.position, c, camSpeed * Time.deltaTime);        
+        //cam.position = Vector3.MoveTowards(cam.position, c, camSpeed * Time.deltaTime);
+
+
+        
+        locationTarget.GetPositionAndRotation(out Vector3 targetPosition, out Quaternion targetRotation);
+        cam.position = Vector3.MoveTowards(cam.position, targetPosition, camSpeed * Time.deltaTime);
     }
 }
