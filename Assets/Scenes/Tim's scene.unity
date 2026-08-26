@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!4 &22044717
 Transform:
   m_ObjectHideFlags: 0
@@ -273,6 +273,114 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39413116}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &67440436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 67440437}
+  - component: {fileID: 67440440}
+  - component: {fileID: 67440439}
+  - component: {fileID: 67440438}
+  m_Layer: 0
+  m_Name: StartingBlock02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &67440437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67440436}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9997854, z: -0, w: -0.020715522}
+  m_LocalPosition: {x: -242.09882, y: 0.0589328, z: -227.32784}
+  m_LocalScale: {x: 5.23426, y: 0.07583915, z: 3.4647784}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &67440438
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67440436}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &67440439
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67440436}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &67440440
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67440436}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &67478661
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,8 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &78121667
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -502, y: 294}
+  m_AnchoredPosition: {x: -492, y: 284}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &78121669
@@ -373,11 +481,10 @@ MonoBehaviour:
   leaderboardPanel: {fileID: 78121668}
   rowHeight: 45
   rowSpacing: 160
-  fontSize: 180
-  title: RACE
+  fontSize: 160
   normalTextColor: {r: 1, g: 1, b: 1, a: 1}
   firstPlaceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  secondPlaceColor: {r: 1, g: 1, b: 1, a: 1}
+  secondPlaceColor: {r: 0.67295593, g: 0.67295593, b: 0.67295593, a: 1}
   thirdPlaceColor: {r: 1, g: 0.6, b: 0.2, a: 1}
 --- !u!114 &78121670
 MonoBehaviour:
@@ -678,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &155769839
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &214891079
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &218465777
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,8 +922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &219505755
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,8 +968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &335723258
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +1015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &364065879
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 0.5
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &383286802
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,8 +1106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &402027159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,8 +1152,116 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
+--- !u!1 &424712162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 424712163}
+  - component: {fileID: 424712166}
+  - component: {fileID: 424712165}
+  - component: {fileID: 424712164}
+  m_Layer: 0
+  m_Name: StartingBlock04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &424712163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424712162}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9997854, z: -0, w: -0.020715522}
+  m_LocalPosition: {x: -271.4688, y: 0.0589328, z: -229.07784}
+  m_LocalScale: {x: 5.23426, y: 0.07583915, z: 3.4647784}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &424712164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424712162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &424712165
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424712162}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &424712166
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424712162}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &431267630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!4 &431267632
 Transform:
   m_ObjectHideFlags: 0
@@ -1309,6 +1524,114 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500811716}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &552101768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 552101769}
+  - component: {fileID: 552101772}
+  - component: {fileID: 552101771}
+  - component: {fileID: 552101770}
+  m_Layer: 0
+  m_Name: StartingBlock01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &552101769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552101768}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9997854, z: -0, w: -0.020715522}
+  m_LocalPosition: {x: -227.37883, y: 0.0589328, z: -212.60783}
+  m_LocalScale: {x: 5.23426, y: 0.07583915, z: 3.4647784}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &552101770
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552101768}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &552101771
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552101768}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &552101772
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552101768}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &565839247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,8 +1676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &595327657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,8 +1938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &695834759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,7 +1955,7 @@ GameObject:
   - component: {fileID: 695834761}
   - component: {fileID: 695834760}
   m_Layer: 0
-  m_Name: Opponent_04
+  m_Name: Yellow
   m_TagString: Opponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1652,25 +1975,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
+  totalLaps: 4
+  startingGridPosition: {fileID: 424712163}
+  gridReachDistance: 3
+  gridMoveSpeed: 20
+  placeOnGridAtStart: 1
   maxSpeed: 100
   acceleration: 30
   braking: 50
-  skill: 1.5
-  performanceVariation: 0.08
-  corneringAbility: 1
-  battleDistance: 35
-  overtakingDistance: 12
-  overtakingOffset: 12
-  overtakingCommitTime: 3
-  avoidanceStrength: 10
-  avoidanceDistance: 3
-  randomRacingLineOffset: 6
+  skill: 1.06
+  performanceVariation: 0.1
+  corneringAbility: 0.94
+  battleDistance: 25
+  overtakingDistance: 15
+  overtakingOffset: 7
+  overtakingCommitTime: 2
+  overtakingCooldown: 10
+  avoidanceStrength: 4
+  avoidanceDistance: 5
+  randomRacingLineOffset: 5
   useRubberBanding: 1
-  firstPlaceSpeedReduction: 0.06
-  lastPlaceSpeedBoost: 0.06
-  rubberBandSmoothness: 1.5
+  firstPlaceSpeedReduction: 0.1
+  lastPlaceSpeedBoost: 0.12
+  rubberBandActivationDelay: 3
+  rubberBandMinimumDuration: 4
+  rubberBandSmoothness: 100
   useRigidbodyVelocity: 1
-  showDebugInfo: 0
 --- !u!54 &695834761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1781,7 +2111,7 @@ Transform:
   m_GameObject: {fileID: 695834759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -272.73, y: 2.29, z: -228.02}
+  m_LocalPosition: {x: -270.98, y: 2.29, z: -229.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2126,7 +2456,7 @@ GameObject:
   - component: {fileID: 757813621}
   - component: {fileID: 757813620}
   m_Layer: 0
-  m_Name: Opponent_02
+  m_Name: Red
   m_TagString: Opponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2146,25 +2476,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
+  totalLaps: 4
+  startingGridPosition: {fileID: 67440437}
+  gridReachDistance: 3
+  gridMoveSpeed: 20
+  placeOnGridAtStart: 1
   maxSpeed: 100
   acceleration: 30
   braking: 50
-  skill: 0.85
-  performanceVariation: 0.08
-  corneringAbility: 1
-  battleDistance: 35
-  overtakingDistance: 12
-  overtakingOffset: 12
-  overtakingCommitTime: 3
-  avoidanceStrength: 10
-  avoidanceDistance: 3
-  randomRacingLineOffset: 6
+  skill: 0.97
+  performanceVariation: 0.1
+  corneringAbility: 1.05
+  battleDistance: 25
+  overtakingDistance: 15
+  overtakingOffset: 7
+  overtakingCommitTime: 2
+  overtakingCooldown: 10
+  avoidanceStrength: 4
+  avoidanceDistance: 5
+  randomRacingLineOffset: 5
   useRubberBanding: 1
-  firstPlaceSpeedReduction: 0.06
-  lastPlaceSpeedBoost: 0.06
-  rubberBandSmoothness: 1.5
+  firstPlaceSpeedReduction: 0.1
+  lastPlaceSpeedBoost: 0.12
+  rubberBandActivationDelay: 6
+  rubberBandMinimumDuration: 4
+  rubberBandSmoothness: 10
   useRigidbodyVelocity: 1
-  showDebugInfo: 0
 --- !u!54 &757813621
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2275,7 +2612,7 @@ Transform:
   m_GameObject: {fileID: 757813619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -263.54, y: 2.29, z: -228.18}
+  m_LocalPosition: {x: -242.81, y: 2.29, z: -227.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2325,8 +2662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &837932777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,7 +2709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &849269908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,8 +2754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &849894693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2463,8 +2800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &866298308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &953278917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,8 +3324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1113438710
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,7 +3371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &1124670983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3080,7 +3417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &1140796766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,8 +3570,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1185331079
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,8 +3616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1243697386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3325,8 +3662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1268212045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3505,8 +3842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1315514929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,13 +3929,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315514929}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1665561, y: 0.45039392, z: -0.070961125, w: 0.87428194}
-  m_LocalPosition: {x: -377.3, y: 36, z: -233.9}
+  m_LocalRotation: {x: 0.13709237, y: 0.69491196, z: -0.11824601, w: 0.69593173}
+  m_LocalPosition: {x: -446.9, y: 36, z: -128.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 20.803, y: 54.803, z: 1.591}
+  m_LocalEulerAnglesHint: {x: 20.803, y: 90.208, z: 1.591}
 --- !u!1 &1339983279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,8 +4196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1393138589
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,7 +4351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &1420463632
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,8 +4396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1423917860
 GameObject:
   m_ObjectHideFlags: 0
@@ -4168,6 +4505,114 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423917860}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1446027822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446027823}
+  - component: {fileID: 1446027826}
+  - component: {fileID: 1446027825}
+  - component: {fileID: 1446027824}
+  m_Layer: 0
+  m_Name: StartingBlock03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446027823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446027822}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9997854, z: -0, w: -0.020715522}
+  m_LocalPosition: {x: -256.54883, y: 0.0589328, z: -214.58783}
+  m_LocalScale: {x: 5.23426, y: 0.07583915, z: 3.4647784}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1446027824
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446027822}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1446027825
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446027822}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1446027826
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446027822}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1495559784
 GameObject:
@@ -4286,7 +4731,7 @@ GameObject:
   - component: {fileID: 1503885127}
   - component: {fileID: 1503885126}
   m_Layer: 0
-  m_Name: Opponent_01
+  m_Name: Blue
   m_TagString: Opponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4306,25 +4751,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
+  totalLaps: 4
+  startingGridPosition: {fileID: 552101769}
+  gridReachDistance: 3
+  gridMoveSpeed: 20
+  placeOnGridAtStart: 1
   maxSpeed: 100
   acceleration: 30
   braking: 50
-  skill: 1
-  performanceVariation: 0.08
-  corneringAbility: 1
-  battleDistance: 35
-  overtakingDistance: 12
-  overtakingOffset: 12
-  overtakingCommitTime: 3
-  avoidanceStrength: 10
-  avoidanceDistance: 3
-  randomRacingLineOffset: 6
+  skill: 1.04
+  performanceVariation: 0.1
+  corneringAbility: 0.95
+  battleDistance: 25
+  overtakingDistance: 15
+  overtakingOffset: 7
+  overtakingCommitTime: 2
+  overtakingCooldown: 10
+  avoidanceStrength: 4
+  avoidanceDistance: 5
+  randomRacingLineOffset: 5
   useRubberBanding: 1
-  firstPlaceSpeedReduction: 0.06
-  lastPlaceSpeedBoost: 0.06
-  rubberBandSmoothness: 1.5
+  firstPlaceSpeedReduction: 0.1
+  lastPlaceSpeedBoost: 0.12
+  rubberBandActivationDelay: 3
+  rubberBandMinimumDuration: 4
+  rubberBandSmoothness: 100
   useRigidbodyVelocity: 1
-  showDebugInfo: 0
 --- !u!54 &1503885127
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4435,7 +4887,7 @@ Transform:
   m_GameObject: {fileID: 1503885125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -258.46, y: 2.29, z: -215.81}
+  m_LocalPosition: {x: -227.86, y: 2.29, z: -212.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4486,7 +4938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 9
+  reachDistance: 13.03
 --- !u!1 &1725608937
 GameObject:
   m_ObjectHideFlags: 0
@@ -4513,7 +4965,7 @@ Transform:
   m_GameObject: {fileID: 1725608937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -262.6, y: 2.63, z: -219.89}
+  m_LocalPosition: {x: -198.7, y: 2.63, z: -216.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4532,7 +4984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  reachDistance: 14
+  reachDistance: 13.03
 --- !u!1 &1782400156
 GameObject:
   m_ObjectHideFlags: 0
@@ -4980,8 +5432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1863798932
 GameObject:
   m_ObjectHideFlags: 0
@@ -5134,8 +5586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1931883213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5180,8 +5632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &1945410330
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,7 +5757,7 @@ GameObject:
   - component: {fileID: 1979752209}
   - component: {fileID: 1979752208}
   m_Layer: 0
-  m_Name: Opponent_03
+  m_Name: Purple
   m_TagString: Opponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5325,25 +5777,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
+  totalLaps: 4
+  startingGridPosition: {fileID: 1446027823}
+  gridReachDistance: 3
+  gridMoveSpeed: 20
+  placeOnGridAtStart: 1
   maxSpeed: 100
   acceleration: 30
   braking: 50
-  skill: 1.15
-  performanceVariation: 0.08
-  corneringAbility: 1
-  battleDistance: 35
-  overtakingDistance: 12
-  overtakingOffset: 12
-  overtakingCommitTime: 3
-  avoidanceStrength: 10
-  avoidanceDistance: 3
-  randomRacingLineOffset: 6
+  skill: 0.93
+  performanceVariation: 0.1
+  corneringAbility: 1.2
+  battleDistance: 25
+  overtakingDistance: 15
+  overtakingOffset: 7
+  overtakingCommitTime: 2
+  overtakingCooldown: 10
+  avoidanceStrength: 4
+  avoidanceDistance: 5
+  randomRacingLineOffset: 5
   useRubberBanding: 1
-  firstPlaceSpeedReduction: 0.06
-  lastPlaceSpeedBoost: 0.06
-  rubberBandSmoothness: 1.5
+  firstPlaceSpeedReduction: 0.1
+  lastPlaceSpeedBoost: 0.12
+  rubberBandActivationDelay: 3
+  rubberBandMinimumDuration: 4
+  rubberBandSmoothness: 100
   useRigidbodyVelocity: 1
-  showDebugInfo: 0
 --- !u!54 &1979752209
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5454,7 +5913,7 @@ Transform:
   m_GameObject: {fileID: 1979752207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -269.27, y: 2.29, z: -216.02}
+  m_LocalPosition: {x: -257, y: 2.29, z: -214.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5490,6 +5949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findOpponentsAutomatically: 1
+  totalLaps: 4
   racers: []
 --- !u!4 &1984216620
 Transform:
@@ -5550,8 +6010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &2047670753
 GameObject:
   m_ObjectHideFlags: 0
@@ -5812,8 +6272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &2096416613
 GameObject:
   m_ObjectHideFlags: 0
@@ -5955,8 +6415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &2108572599
 GameObject:
   m_ObjectHideFlags: 0
@@ -6001,8 +6461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ebf801b7694744c99a009461a3a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1
-  reachDistance: 9
+  speedMultiplier: 0.75
+  reachDistance: 13.03
 --- !u!1 &2145978684
 GameObject:
   m_ObjectHideFlags: 0
@@ -6132,6 +6592,10 @@ SceneRoots:
   - {fileID: 1315514932}
   - {fileID: 1782400159}
   - {fileID: 2096416615}
+  - {fileID: 552101769}
+  - {fileID: 67440437}
+  - {fileID: 1446027823}
+  - {fileID: 424712163}
   - {fileID: 1268212049}
   - {fileID: 2145978686}
   - {fileID: 1503885131}
