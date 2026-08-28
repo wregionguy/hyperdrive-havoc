@@ -4,23 +4,37 @@ using UnityEngine;
 public class RaceManager : MonoBehaviour
 {
     [Header("Race Settings")]
-    public bool findOpponentsAutomatically = true; 
-    public int totalLaps = 3; 
+    public bool findOpponentsAutomatically = true; // Zoekt automatisch alle opponents.
+    public int totalLaps = 3; // Bepaalt hoeveel rondes de race heeft.
+
+    [Header("Player")]
+    public PlayerRaceController player; // De speler van de race.
 
     [Header("Leaderboard")]
-    public List<SpaceShipAI> racers = new List<SpaceShipAI>(); 
+    public List<SpaceShipAI> racers = new List<SpaceShipAI>(); // Lijst met alle AI racers.
 
     private List<SpaceShipAI> finishedRacers =
-        new List<SpaceShipAI>(); // Lijst met racers in de volgorde waarin ze finishen.
+        new List<SpaceShipAI>(); // Lijst met AI racers in finishvolgorde.
+
+    private bool playerFinishedAdded; // Houdt bij of de player als gefinisht geregistreerd is.
 
     private void Start()
     {
-        if (findOpponentsAutomatically) // Controleert of opponents automatisch gezocht moeten worden.
+        if (player == null)
+        {
+            player =
+                FindFirstObjectByType<PlayerRaceController>();
+        }
+
+        if (findOpponentsAutomatically)
         {
             FindRacers(); // Zoekt alle opponents.
         }
 
         SetRaceLaps(); // Geeft het aantal rondes aan alle racers.
+
+        if (player != null)
+            player.totalLaps = totalLaps; // Geeft het aantal rondes aan de player.
     }
 
     private void Update()
@@ -41,7 +55,7 @@ public class RaceManager : MonoBehaviour
             SpaceShipAI ai =
                 obj.GetComponent<SpaceShipAI>(); // Zoekt het SpaceShipAI script.
 
-            if (ai != null) // Controleert of het script bestaat.
+            if (ai != null)
             {
                 racers.Add(ai); // Voegt de racer toe aan de lijst.
             }
@@ -52,9 +66,9 @@ public class RaceManager : MonoBehaviour
 
     private void SetRaceLaps()
     {
-        foreach (SpaceShipAI racer in racers) // Gaat door alle racers.
+        foreach (SpaceShipAI racer in racers)
         {
-            if (racer != null) // Controleert of de racer bestaat.
+            if (racer != null)
             {
                 racer.totalLaps = totalLaps; // Geeft het aantal rondes aan de racer.
             }
@@ -63,148 +77,284 @@ public class RaceManager : MonoBehaviour
 
     private void UpdateFinishedRacers()
     {
-        foreach (SpaceShipAI racer in racers) // Controleert alle racers.
+        foreach (SpaceShipAI racer in racers)
         {
-            if (racer == null) // Controleert of de racer bestaat.
+            if (racer == null)
                 continue;
 
-            if (!racer.HasFinished()) // Controleert of de racer nog niet klaar is.
+            if (!racer.HasFinished())
                 continue;
 
-            if (finishedRacers.Contains(racer)) // Controleert of de racer al in de finishlijst staat.
+            if (finishedRacers.Contains(racer))
                 continue;
 
             finishedRacers.Add(racer); // Voegt de racer toe in finishvolgorde.
+        }
+
+        if (player != null &&
+            player.HasFinished() &&
+            !playerFinishedAdded)
+        {
+            playerFinishedAdded = true;
         }
     }
 
     public void SortRacers()
     {
-        racers.RemoveAll(racer => racer == null); // Verwijdert racers die niet meer bestaan.
+        racers.RemoveAll(racer => racer == null);
 
         racers.Sort((a, b) =>
         {
-            bool aFinished = finishedRacers.Contains(a); // Controleert of racer A gefinisht is.
-            bool bFinished = finishedRacers.Contains(b); // Controleert of racer B gefinisht is.
+            bool aFinished = finishedRacers.Contains(a);
+            bool bFinished = finishedRacers.Contains(b);
 
-            if (aFinished && !bFinished) // Als A gefinisht is en B niet.
+            if (aFinished && !bFinished)
                 return -1;
 
-            if (!aFinished && bFinished) // Als B gefinisht is en A niet.
+            if (!aFinished && bFinished)
                 return 1;
 
-            if (aFinished && bFinished) // Als beide gefinisht zijn.
+            if (aFinished && bFinished)
             {
                 int aFinishPosition =
-                    finishedRacers.IndexOf(a); // Haalt de finishpositie van A op.
+                    finishedRacers.IndexOf(a);
 
                 int bFinishPosition =
-                    finishedRacers.IndexOf(b); // Haalt de finishpositie van B op.
+                    finishedRacers.IndexOf(b);
 
                 return aFinishPosition.CompareTo(
                     bFinishPosition
-                ); // Sorteert op finishvolgorde.
+                );
             }
 
             float progressA =
-                a.GetPublicRaceProgress(); // Haalt de racevoortgang van A op.
+                a.GetPublicRaceProgress();
 
             float progressB =
-                b.GetPublicRaceProgress(); // Haalt de racevoortgang van B op.
+                b.GetPublicRaceProgress();
 
-            return progressB.CompareTo(progressA); // Zet de racer met meer voortgang bovenaan.
+            return progressB.CompareTo(progressA);
         });
     }
 
     public int GetPosition(SpaceShipAI racer)
     {
-        if (racer == null) // Controleert of de racer bestaat.
+        if (racer == null)
             return 0;
 
-        if (finishedRacers.Contains(racer)) // Controleert of de racer gefinisht is.
-        {
-            return finishedRacers.IndexOf(racer) + 1; // Geeft de definitieve finishpositie.
-        }
-
-        int position = 1; // Begint op positie 1.
+        int position = 1;
 
         float myProgress =
-            racer.GetPublicRaceProgress(); // Haalt de eigen racevoortgang op.
+            racer.GetPublicRaceProgress();
 
-        foreach (SpaceShipAI other in racers) // Controleert alle andere racers.
+        foreach (SpaceShipAI other in racers)
         {
-            if (other == null || other == racer) // Slaat lege racers en zichzelf over.
+            if (other == null || other == racer)
                 continue;
 
-            if (finishedRacers.Contains(other)) // Gefinishte racers staan automatisch voor hem.
+            if (finishedRacers.Contains(other))
             {
-                position++; // Verhoogt de positie.
+                position++;
                 continue;
             }
 
-            float otherProgress =
-                other.GetPublicRaceProgress(); // Haalt de racevoortgang van de andere racer op.
-
-            if (otherProgress > myProgress) // Controleert of de andere racer verder is.
+            if (other.GetPublicRaceProgress() > myProgress)
             {
-                position++; // Verhoogt de positie.
+                position++;
             }
         }
 
-        return position; // Geeft de huidige positie terug.
+        if (player != null &&
+            !player.HasFinished() &&
+            player.GetRaceProgress() > myProgress)
+        {
+            position++;
+        }
+
+        return position;
+    }
+
+    public int GetPlayerPosition()
+    {
+        if (player == null)
+            return 0;
+
+        int position = 1;
+
+        float playerProgress =
+            player.GetRaceProgress();
+
+        foreach (SpaceShipAI racer in racers)
+        {
+            if (racer == null)
+                continue;
+
+            if (finishedRacers.Contains(racer) ||
+                racer.GetPublicRaceProgress() > playerProgress)
+            {
+                position++;
+            }
+        }
+
+        return position;
     }
 
     public SpaceShipAI GetRacer(int position)
     {
-        if (position < 1 ||
-            position > racers.Count) // Controleert of de positie geldig is.
+        SortRacers();
+
+        int aiIndex = 0;
+
+        for (int i = 1; i <= GetRacerCount(); i++)
         {
-            return null;
+            if (GetPosition(racers[aiIndex]) == position)
+                return racers[aiIndex];
+
+            aiIndex++;
+
+            if (aiIndex >= racers.Count)
+                break;
         }
 
-        SortRacers(); // Sorteert de racers opnieuw.
-
-        return racers[position - 1]; // Geeft de racer op die positie terug.
+        return null;
     }
 
     public int GetRacerCount()
     {
-        return racers.Count; // Geeft het aantal racers terug.
+        return racers.Count +
+               (player != null ? 1 : 0);
     }
 
     public int GetRacerLap(SpaceShipAI racer)
     {
-        if (racer == null) // Controleert of de racer bestaat.
+        if (racer == null)
             return 0;
 
-        return racer.GetCurrentLap(); // Geeft de huidige ronde van de racer terug.
+        return racer.GetCurrentLap();
+    }
+
+    public int GetPlayerLap()
+    {
+        if (player == null)
+            return 0;
+
+        return player.GetCurrentLap();
+    }
+
+    public float GetProgress(SpaceShipAI racer)
+    {
+        if (racer == null)
+            return 0f;
+
+        return racer.GetPublicRaceProgress();
+    }
+
+    public bool IsPlayerAtPosition(int position)
+    {
+        return GetPlayerPosition() == position;
+    }
+
+    public string GetRacerName(int position)
+    {
+        if (player != null &&
+            GetPlayerPosition() == position)
+        {
+            return player.gameObject.name;
+        }
+
+        List<RacerEntry> entries =
+            GetSortedEntries();
+
+        if (position < 1 ||
+            position > entries.Count)
+        {
+            return "";
+        }
+
+        return entries[position - 1].name;
+    }
+
+    private List<RacerEntry> GetSortedEntries()
+    {
+        List<RacerEntry> entries =
+            new List<RacerEntry>();
+
+        foreach (SpaceShipAI racer in racers)
+        {
+            if (racer != null)
+            {
+                entries.Add(
+                    new RacerEntry
+                    {
+                        name = racer.gameObject.name,
+                        progress = racer.GetPublicRaceProgress(),
+                        finished =
+                            finishedRacers.Contains(racer)
+                    }
+                );
+            }
+        }
+
+        if (player != null)
+        {
+            entries.Add(
+                new RacerEntry
+                {
+                    name = player.gameObject.name,
+                    progress = player.GetRaceProgress(),
+                    finished = player.HasFinished()
+                }
+            );
+        }
+
+        entries.Sort((a, b) =>
+        {
+            if (a.finished && !b.finished)
+                return -1;
+
+            if (!a.finished && b.finished)
+                return 1;
+
+            return b.progress.CompareTo(a.progress);
+        });
+
+        return entries;
     }
 
     public bool IsRaceFinished()
     {
-        return finishedRacers.Count >= racers.Count &&
-               racers.Count > 0; // Controleert of alle racers gefinisht zijn.
+        return
+            player != null &&
+            player.HasFinished() &&
+            finishedRacers.Count >= racers.Count;
     }
 
     public SpaceShipAI GetWinner()
     {
-        if (finishedRacers.Count == 0) // Controleert of er al iemand gefinisht is.
+        if (finishedRacers.Count == 0)
             return null;
 
-        return finishedRacers[0]; // Geeft de winnaar terug.
+        return finishedRacers[0];
     }
 
     public int GetFinishPosition(SpaceShipAI racer)
     {
-        if (racer == null) // Controleert of de racer bestaat.
+        if (racer == null)
             return 0;
 
         int index =
-            finishedRacers.IndexOf(racer); // Zoekt de racer in de finishlijst.
+            finishedRacers.IndexOf(racer);
 
-        if (index == -1) // Controleert of de racer niet gevonden is.
+        if (index == -1)
             return 0;
 
-        return index + 1; // Geeft de definitieve finishpositie terug.
+        return index + 1;
+    }
+
+    private class RacerEntry
+    {
+        public string name;
+        public float progress;
+        public bool finished;
     }
 }

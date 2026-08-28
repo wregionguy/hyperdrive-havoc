@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class LeaderboardUI : MonoBehaviour
@@ -27,10 +26,9 @@ public class LeaderboardUI : MonoBehaviour
     {
         if (raceManager == null)
         {
-            raceManager = FindFirstObjectByType<RaceManager>();
+            raceManager =
+                FindFirstObjectByType<RaceManager>();
         }
-
-        CreateTitle();
     }
 
     private void Update()
@@ -41,54 +39,37 @@ public class LeaderboardUI : MonoBehaviour
         UpdateLeaderboard();
     }
 
-    private void CreateTitle()
-    {
-        GameObject obj = new GameObject("Leaderboard Title");
-
-        obj.transform.SetParent(leaderboardPanel, false);
-
-        titleObject = obj;
-
-        RectTransform rect = obj.AddComponent<RectTransform>();
-
-        rect.anchorMin = new Vector2(0f, 1f);
-        rect.anchorMax = new Vector2(1f, 1f);
-        rect.pivot = new Vector2(0.5f, 1f);
-        rect.anchoredPosition = new Vector2(0f, 0f);
-        rect.sizeDelta = new Vector2(0f, rowHeight);
-
-        TextMeshProUGUI text =
-            obj.AddComponent<TextMeshProUGUI>();
-
-        text.fontSize = fontSize + 6;
-        text.alignment = TextAlignmentOptions.Center;
-        text.color = normalTextColor;
-    }
-
     private void UpdateLeaderboard()
     {
         ClearRows();
 
-        int count = raceManager.GetRacerCount();
+        int count =
+            raceManager.GetRacerCount();
 
-        for (int i = 0; i < count; i++)
+        for (int i = 1; i <= count; i++)
         {
-            SpaceShipAI racer =
-                raceManager.GetRacer(i + 1);
+            string racerName =
+                raceManager.GetRacerName(i);
 
-            if (racer == null)
+            if (string.IsNullOrEmpty(racerName))
                 continue;
 
-            CreateRow(racer, i + 1);
+            CreateRow(
+                racerName,
+                i
+            );
         }
     }
 
     private void CreateRow(
-        SpaceShipAI racer,
+        string racerName,
         int position)
     {
         GameObject row =
-            new GameObject("Leaderboard Row " + position);
+            new GameObject(
+                "Leaderboard Row " +
+                position
+            );
 
         row.transform.SetParent(
             leaderboardPanel,
@@ -98,9 +79,14 @@ public class LeaderboardUI : MonoBehaviour
         RectTransform rect =
             row.AddComponent<RectTransform>();
 
-        rect.anchorMin = new Vector2(0f, 1f);
-        rect.anchorMax = new Vector2(1f, 1f);
-        rect.pivot = new Vector2(0.5f, 1f);
+        rect.anchorMin =
+            new Vector2(0f, 1f);
+
+        rect.anchorMax =
+            new Vector2(1f, 1f);
+
+        rect.pivot =
+            new Vector2(0.5f, 1f);
 
         float y =
             -(rowHeight + rowSpacing) *
@@ -115,14 +101,17 @@ public class LeaderboardUI : MonoBehaviour
         TextMeshProUGUI text =
             row.AddComponent<TextMeshProUGUI>();
 
-        string racerName =
-            racer.gameObject.name;
-
         text.text =
-            position + "   " + racerName;
+            position +
+            "   " +
+            racerName;
 
-        text.fontSize = fontSize;
-        text.alignment = TextAlignmentOptions.Left;
+        text.fontSize =
+            fontSize;
+
+        text.alignment =
+            TextAlignmentOptions.Left;
+
         text.verticalAlignment =
             VerticalAlignmentOptions.Middle;
 
@@ -130,7 +119,8 @@ public class LeaderboardUI : MonoBehaviour
             GetPositionColor(position);
     }
 
-    private Color GetPositionColor(int position)
+    private Color GetPositionColor(
+        int position)
     {
         if (position == 1)
             return firstPlaceColor;
@@ -147,7 +137,8 @@ public class LeaderboardUI : MonoBehaviour
     private void ClearRows()
     {
         for (
-            int i = leaderboardPanel.childCount - 1;
+            int i =
+                leaderboardPanel.childCount - 1;
             i >= 0;
             i--
         )
@@ -155,10 +146,15 @@ public class LeaderboardUI : MonoBehaviour
             Transform child =
                 leaderboardPanel.GetChild(i);
 
-            if (child.gameObject == titleObject)
+            if (child.gameObject ==
+                titleObject)
+            {
                 continue;
+            }
 
-            Destroy(child.gameObject);
+            Destroy(
+                child.gameObject
+            );
         }
     }
 }
