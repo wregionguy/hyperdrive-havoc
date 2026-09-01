@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1938846084267365368}
   - component: {fileID: 7867507669948337565}
   - component: {fileID: 7281442908367657205}
-  - component: {fileID: 14884768759682656}
+  - component: {fileID: 5957640082272888924}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -138,7 +138,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &14884768759682656
+--- !u!114 &5957640082272888924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,14 +147,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5095798770211100506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f142fc3ad388f574ca7502d160e2e619, type: 3}
+  m_Script: {fileID: 11500000, guid: e32253864ba266846a9e6915ed71eb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDir: {x: 0, y: 0, z: 0}
-  moveSpeed: 50
-  rotate: {x: 0, y: 0, z: 0}
+  moveSpeed: 30
+  rotateSpeed: 180
+  lateralDamping: 5
   rb: {fileID: 7281442908367657205}
-  rotateSpeed: 100
 --- !u!1 &5259931177098371923
 GameObject:
   m_ObjectHideFlags: 0
