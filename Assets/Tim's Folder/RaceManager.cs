@@ -5,18 +5,21 @@ public class RaceManager : MonoBehaviour
 {
     [Header("Race Settings")]
     public bool findOpponentsAutomatically = true; // Zoekt automatisch alle opponents.
-    public int totalLaps = 3; // Bepaalt hoeveel rondes de race heeft.
+    public int totalLaps = 3; // Bepaalt hoeveel normale rondes de race heeft.
 
     [Header("Player")]
     public PlayerRaceController player; // De speler van de race.
 
     [Header("Leaderboard")]
-    public List<SpaceShipAI> racers = new List<SpaceShipAI>(); // Lijst met alle AI racers.
+    public List<SpaceShipAI> racers =
+        new List<SpaceShipAI>(); // Lijst met alle AI racers.
 
-    private List<SpaceShipAI> finishedRacers =
-        new List<SpaceShipAI>(); // Lijst met AI racers in finishvolgorde.
+    // Deze lijst bevat ALLE racers in de volgorde waarin ze
+    // hun race definitief hebben voltooid.
+    private List<object> finishedRacers =
+        new List<object>();
 
-    private bool playerFinishedAdded; // Houdt bij of de player als gefinisht geregistreerd is.
+    private bool playerFinishedAdded;
 
     private void Start()
     {
@@ -28,40 +31,52 @@ public class RaceManager : MonoBehaviour
 
         if (findOpponentsAutomatically)
         {
-            FindRacers(); // Zoekt alle opponents.
+            FindRacers();
         }
 
-        SetRaceLaps(); // Geeft het aantal rondes aan alle racers.
+        SetRaceLaps();
 
         if (player != null)
-            player.totalLaps = totalLaps; // Geeft het aantal rondes aan de player.
+        {
+            player.totalLaps =
+                totalLaps;
+        }
     }
 
     private void Update()
     {
-        UpdateFinishedRacers(); // Controleert welke racers klaar zijn.
-        SortRacers(); // Sorteert de racers op racepositie.
+        UpdateFinishedRacers();
+
+        // Zolang de race nog bezig is,
+        // worden de niet-gefinishte racers op progress gesorteerd.
+        SortRacers();
     }
+
+    // ============================================================
+    // FIND RACERS
+    // ============================================================
 
     public void FindRacers()
     {
-        racers.Clear(); // Maakt de huidige lijst leeg.
+        racers.Clear();
 
         GameObject[] objects =
-            GameObject.FindGameObjectsWithTag("Opponent"); // Zoekt alle objects met de tag Opponent.
+            GameObject.FindGameObjectsWithTag(
+                "Opponent"
+            );
 
         foreach (GameObject obj in objects)
         {
             SpaceShipAI ai =
-                obj.GetComponent<SpaceShipAI>(); // Zoekt het SpaceShipAI script.
+                obj.GetComponent<SpaceShipAI>();
 
             if (ai != null)
             {
-                racers.Add(ai); // Voegt de racer toe aan de lijst.
+                racers.Add(ai);
             }
         }
 
-        SortRacers(); // Sorteert de racers.
+        SortRacers();
     }
 
     private void SetRaceLaps()
@@ -70,13 +85,22 @@ public class RaceManager : MonoBehaviour
         {
             if (racer != null)
             {
-                racer.totalLaps = totalLaps; // Geeft het aantal rondes aan de racer.
+                racer.totalLaps =
+                    totalLaps;
             }
         }
     }
 
+    // ============================================================
+    // FINISH REGISTRATIE
+    // ============================================================
+
     private void UpdateFinishedRacers()
     {
+        // --------------------------------------------------------
+        // AI
+        // --------------------------------------------------------
+
         foreach (SpaceShipAI racer in racers)
         {
             if (racer == null)
@@ -88,59 +112,98 @@ public class RaceManager : MonoBehaviour
             if (finishedRacers.Contains(racer))
                 continue;
 
-            finishedRacers.Add(racer); // Voegt de racer toe in finishvolgorde.
+            // Deze racer wordt NU definitief geregistreerd.
+            finishedRacers.Add(racer);
         }
+
+        // --------------------------------------------------------
+        // PLAYER
+        // --------------------------------------------------------
 
         if (player != null &&
             player.HasFinished() &&
             !playerFinishedAdded)
         {
             playerFinishedAdded = true;
+
+            // De player wordt toegevoegd op het moment
+            // dat hij zijn laatste normale lap heeft voltooid.
+            finishedRacers.Add(player);
         }
     }
 
+    // ============================================================
+    // LEADERBOARD SORTING
+    // ============================================================
+
     public void SortRacers()
     {
-        racers.RemoveAll(racer => racer == null);
+        racers.RemoveAll(
+            racer => racer == null
+        );
 
         racers.Sort((a, b) =>
         {
-            bool aFinished = finishedRacers.Contains(a);
-            bool bFinished = finishedRacers.Contains(b);
+            bool aFinished =
+                finishedRacers.Contains(a);
 
+            bool bFinished =
+                finishedRacers.Contains(b);
+
+            // Een gefinishte racer blijft altijd boven
+            // een racer die nog rijdt.
             if (aFinished && !bFinished)
                 return -1;
 
             if (!aFinished && bFinished)
                 return 1;
 
+            // Als beide gefinisht zijn:
+            // gebruik de echte finishvolgorde.
             if (aFinished && bFinished)
             {
-                int aFinishPosition =
+                int aIndex =
                     finishedRacers.IndexOf(a);
 
-                int bFinishPosition =
+                int bIndex =
                     finishedRacers.IndexOf(b);
 
-                return aFinishPosition.CompareTo(
-                    bFinishPosition
-                );
+                return
+                    aIndex.CompareTo(bIndex);
             }
 
+            // Beide rijden nog:
+            // sorteer op race progress.
             float progressA =
                 a.GetPublicRaceProgress();
 
             float progressB =
                 b.GetPublicRaceProgress();
 
-            return progressB.CompareTo(progressA);
+            return
+                progressB.CompareTo(progressA);
         });
     }
 
-    public int GetPosition(SpaceShipAI racer)
+    // ============================================================
+    // POSITIONS
+    // ============================================================
+
+    public int GetPosition(
+        SpaceShipAI racer)
     {
         if (racer == null)
             return 0;
+
+        // Als deze racer al definitief gefinisht is,
+        // is zijn positie permanent.
+        int finishedIndex =
+            finishedRacers.IndexOf(racer);
+
+        if (finishedIndex >= 0)
+        {
+            return finishedIndex + 1;
+        }
 
         int position = 1;
 
@@ -149,24 +212,29 @@ public class RaceManager : MonoBehaviour
 
         foreach (SpaceShipAI other in racers)
         {
-            if (other == null || other == racer)
+            if (other == null ||
+                other == racer)
                 continue;
 
+            // Gefinishte AI's staan al voor deze racer.
             if (finishedRacers.Contains(other))
             {
                 position++;
                 continue;
             }
 
-            if (other.GetPublicRaceProgress() > myProgress)
+            if (other.GetPublicRaceProgress() >
+                myProgress)
             {
                 position++;
             }
         }
 
+        // Player die nog rijdt kan ook voor de AI staan.
         if (player != null &&
             !player.HasFinished() &&
-            player.GetRaceProgress() > myProgress)
+            player.GetRaceProgress() >
+            myProgress)
         {
             position++;
         }
@@ -179,6 +247,16 @@ public class RaceManager : MonoBehaviour
         if (player == null)
             return 0;
 
+        // BELANGRIJK:
+        // Als de player gefinisht is, blijft deze positie vast.
+        int finishedIndex =
+            finishedRacers.IndexOf(player);
+
+        if (finishedIndex >= 0)
+        {
+            return finishedIndex + 1;
+        }
+
         int position = 1;
 
         float playerProgress =
@@ -189,8 +267,14 @@ public class RaceManager : MonoBehaviour
             if (racer == null)
                 continue;
 
-            if (finishedRacers.Contains(racer) ||
-                racer.GetPublicRaceProgress() > playerProgress)
+            if (finishedRacers.Contains(racer))
+            {
+                position++;
+                continue;
+            }
+
+            if (racer.GetPublicRaceProgress() >
+                playerProgress)
             {
                 position++;
             }
@@ -199,21 +283,22 @@ public class RaceManager : MonoBehaviour
         return position;
     }
 
-    public SpaceShipAI GetRacer(int position)
+    // ============================================================
+    // GET RACER
+    // ============================================================
+
+    public SpaceShipAI GetRacer(
+        int position)
     {
         SortRacers();
 
-        int aiIndex = 0;
-
-        for (int i = 1; i <= GetRacerCount(); i++)
+        foreach (SpaceShipAI racer in racers)
         {
-            if (GetPosition(racers[aiIndex]) == position)
-                return racers[aiIndex];
-
-            aiIndex++;
-
-            if (aiIndex >= racers.Count)
-                break;
+            if (GetPosition(racer) ==
+                position)
+            {
+                return racer;
+            }
         }
 
         return null;
@@ -222,10 +307,15 @@ public class RaceManager : MonoBehaviour
     public int GetRacerCount()
     {
         return racers.Count +
-               (player != null ? 1 : 0);
+            (player != null ? 1 : 0);
     }
 
-    public int GetRacerLap(SpaceShipAI racer)
+    // ============================================================
+    // LAPS
+    // ============================================================
+
+    public int GetRacerLap(
+        SpaceShipAI racer)
     {
         if (racer == null)
             return 0;
@@ -241,7 +331,12 @@ public class RaceManager : MonoBehaviour
         return player.GetCurrentLap();
     }
 
-    public float GetProgress(SpaceShipAI racer)
+    // ============================================================
+    // PROGRESS
+    // ============================================================
+
+    public float GetProgress(
+        SpaceShipAI racer)
     {
         if (racer == null)
             return 0f;
@@ -249,19 +344,21 @@ public class RaceManager : MonoBehaviour
         return racer.GetPublicRaceProgress();
     }
 
-    public bool IsPlayerAtPosition(int position)
+    public bool IsPlayerAtPosition(
+        int position)
     {
-        return GetPlayerPosition() == position;
+        return
+            GetPlayerPosition() ==
+            position;
     }
 
-    public string GetRacerName(int position)
-    {
-        if (player != null &&
-            GetPlayerPosition() == position)
-        {
-            return player.gameObject.name;
-        }
+    // ============================================================
+    // LEADERBOARD NAME
+    // ============================================================
 
+    public string GetRacerName(
+        int position)
+    {
         List<RacerEntry> entries =
             GetSortedEntries();
 
@@ -271,13 +368,19 @@ public class RaceManager : MonoBehaviour
             return "";
         }
 
-        return entries[position - 1].name;
+        return
+            entries[position - 1].name;
     }
 
-    private List<RacerEntry> GetSortedEntries()
+    private List<RacerEntry>
+        GetSortedEntries()
     {
         List<RacerEntry> entries =
             new List<RacerEntry>();
+
+        // --------------------------------------------------------
+        // AI
+        // --------------------------------------------------------
 
         foreach (SpaceShipAI racer in racers)
         {
@@ -286,47 +389,120 @@ public class RaceManager : MonoBehaviour
                 entries.Add(
                     new RacerEntry
                     {
-                        name = racer.gameObject.name,
-                        progress = racer.GetPublicRaceProgress(),
+                        racer = racer,
+                        name =
+                            racer.gameObject.name,
+                        progress =
+                            racer.GetPublicRaceProgress(),
                         finished =
-                            finishedRacers.Contains(racer)
+                            finishedRacers.Contains(
+                                racer
+                            )
                     }
                 );
             }
         }
+
+        // --------------------------------------------------------
+        // PLAYER
+        // --------------------------------------------------------
 
         if (player != null)
         {
             entries.Add(
                 new RacerEntry
                 {
-                    name = player.gameObject.name,
-                    progress = player.GetRaceProgress(),
-                    finished = player.HasFinished()
+                    player = player,
+                    name =
+                        player.gameObject.name,
+                    progress =
+                        player.GetRaceProgress(),
+                    finished =
+                        finishedRacers.Contains(
+                            player
+                        )
                 }
             );
         }
 
+        // --------------------------------------------------------
+        // SORT
+        // --------------------------------------------------------
+
         entries.Sort((a, b) =>
         {
-            if (a.finished && !b.finished)
+            bool aFinished =
+                a.finished;
+
+            bool bFinished =
+                b.finished;
+
+            if (aFinished && !bFinished)
                 return -1;
 
-            if (!a.finished && b.finished)
+            if (!aFinished && bFinished)
                 return 1;
 
-            return b.progress.CompareTo(a.progress);
+            // Als beide gefinisht zijn,
+            // gebruik de echte finishvolgorde.
+            if (aFinished && bFinished)
+            {
+                int aIndex =
+                    GetFinishedIndex(a);
+
+                int bIndex =
+                    GetFinishedIndex(b);
+
+                return
+                    aIndex.CompareTo(bIndex);
+            }
+
+            // Nog niet gefinisht:
+            // hoogste progress eerst.
+            return
+                b.progress.CompareTo(
+                    a.progress
+                );
         });
 
         return entries;
     }
 
+    private int GetFinishedIndex(
+        RacerEntry entry)
+    {
+        if (entry.racer != null)
+        {
+            return
+                finishedRacers.IndexOf(
+                    entry.racer
+                );
+        }
+
+        if (entry.player != null)
+        {
+            return
+                finishedRacers.IndexOf(
+                    entry.player
+                );
+        }
+
+        return int.MaxValue;
+    }
+
+    // ============================================================
+    // RACE STATUS
+    // ============================================================
+
     public bool IsRaceFinished()
     {
+        if (player == null)
+            return false;
+
         return
-            player != null &&
             player.HasFinished() &&
-            finishedRacers.Count >= racers.Count;
+            finishedRacers.Count >=
+            racers.Count + 1;
     }
 
     public SpaceShipAI GetWinner()
@@ -334,16 +510,22 @@ public class RaceManager : MonoBehaviour
         if (finishedRacers.Count == 0)
             return null;
 
-        return finishedRacers[0];
+        if (finishedRacers[0] is SpaceShipAI ai)
+            return ai;
+
+        return null;
     }
 
-    public int GetFinishPosition(SpaceShipAI racer)
+    public int GetFinishPosition(
+        SpaceShipAI racer)
     {
         if (racer == null)
             return 0;
 
         int index =
-            finishedRacers.IndexOf(racer);
+            finishedRacers.IndexOf(
+                racer
+            );
 
         if (index == -1)
             return 0;
@@ -351,8 +533,40 @@ public class RaceManager : MonoBehaviour
         return index + 1;
     }
 
+    public bool HasPlayerFinished()
+    {
+        return
+            player != null &&
+            finishedRacers.Contains(
+                player
+            );
+    }
+
+    public int GetPlayerFinishPosition()
+    {
+        if (player == null)
+            return 0;
+
+        int index =
+            finishedRacers.IndexOf(
+                player
+            );
+
+        if (index == -1)
+            return 0;
+
+        return index + 1;
+    }
+
+    // ============================================================
+    // ENTRY
+    // ============================================================
+
     private class RacerEntry
     {
+        public SpaceShipAI racer;
+        public PlayerRaceController player;
+
         public string name;
         public float progress;
         public bool finished;

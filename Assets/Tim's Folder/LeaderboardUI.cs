@@ -18,7 +18,12 @@ public class LeaderboardUI : MonoBehaviour
     public Color normalTextColor = Color.white;
     public Color firstPlaceColor = Color.yellow;
     public Color secondPlaceColor = Color.white;
-    public Color thirdPlaceColor = new Color(1f, 0.6f, 0.2f);
+    public Color thirdPlaceColor =
+        new Color(
+            1f,
+            0.6f,
+            0.2f
+        );
 
     private GameObject titleObject;
 
@@ -36,6 +41,9 @@ public class LeaderboardUI : MonoBehaviour
         if (raceManager == null)
             return;
 
+        if (leaderboardPanel == null)
+            return;
+
         UpdateLeaderboard();
     }
 
@@ -46,13 +54,18 @@ public class LeaderboardUI : MonoBehaviour
         int count =
             raceManager.GetRacerCount();
 
-        for (int i = 1; i <= count; i++)
+        for (int i = 1;
+             i <= count;
+             i++)
         {
             string racerName =
                 raceManager.GetRacerName(i);
 
-            if (string.IsNullOrEmpty(racerName))
+            if (string.IsNullOrEmpty(
+                racerName))
+            {
                 continue;
+            }
 
             CreateRow(
                 racerName,
@@ -77,29 +90,49 @@ public class LeaderboardUI : MonoBehaviour
         );
 
         RectTransform rect =
-            row.AddComponent<RectTransform>();
+            row.AddComponent<
+                RectTransform
+            >();
 
         rect.anchorMin =
-            new Vector2(0f, 1f);
+            new Vector2(
+                0f,
+                1f
+            );
 
         rect.anchorMax =
-            new Vector2(1f, 1f);
+            new Vector2(
+                1f,
+                1f
+            );
 
         rect.pivot =
-            new Vector2(0.5f, 1f);
+            new Vector2(
+                0.5f,
+                1f
+            );
 
         float y =
-            -(rowHeight + rowSpacing) *
+            -(rowHeight +
+            rowSpacing) *
             position;
 
         rect.anchoredPosition =
-            new Vector2(0f, y);
+            new Vector2(
+                0f,
+                y
+            );
 
         rect.sizeDelta =
-            new Vector2(0f, rowHeight);
+            new Vector2(
+                0f,
+                rowHeight
+            );
 
         TextMeshProUGUI text =
-            row.AddComponent<TextMeshProUGUI>();
+            row.AddComponent<
+                TextMeshProUGUI
+            >();
 
         text.text =
             position +
@@ -116,7 +149,9 @@ public class LeaderboardUI : MonoBehaviour
             VerticalAlignmentOptions.Middle;
 
         text.color =
-            GetPositionColor(position);
+            GetPositionColor(
+                position
+            );
     }
 
     private Color GetPositionColor(

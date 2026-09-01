@@ -43,8 +43,10 @@ public class SpaceShipAI : MonoBehaviour
 
     [Header("Rubber Banding")]
     public bool useRubberBanding = true;
+
     [Range(0f, 0.2f)]
     public float firstPlaceSpeedReduction = 0.05f;
+
     [Range(0f, 0.2f)]
     public float lastPlaceSpeedBoost = 0.05f;
 
@@ -57,8 +59,10 @@ public class SpaceShipAI : MonoBehaviour
     public bool useRigidbodyVelocity = true; // Bepaalt welke manier gebruikt wordt om te bewegen.
 
     private Rigidbody rb;
+
     private int currentWaypoint;
     private int currentLap = 1;
+
     private float currentSpeed;
     private float actualMaxSpeed;
     private float actualAcceleration;
@@ -67,21 +71,36 @@ public class SpaceShipAI : MonoBehaviour
     private float racingLineOffset;
 
     private GameObject targetRacer;
+
     private float overtakeTimer;
     private float overtakeCooldownTimer;
     private float overtakeSide; // Bepaalt aan welke kant de opponent inhaalt.
 
-    private float currentRubberBandMultiplier = 1f; // Huidige rubber band snelheid.
-    private int rubberBandState = 0; // Houdt bij welke rubber banding actief is.
+    private float currentRubberBandMultiplier = 1f;
+    private int rubberBandState = 0;
     private float positionTimer;
     private float activeEffectTimer;
 
     private bool hasStarted;
+
+    // ================================
+    // FINISH SYSTEM
+    // ================================
+
     private bool raceFinished;
+    private bool finishLapActive;
+
+    // Hiermee rijdt de AI nog één extra ronde nadat hij zijn laatste normale lap heeft voltooid.
+    private int finishLapStartWaypoint;
+
+    // ================================
+    // UNITY
+    // ================================
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
         rb.freezeRotation = true; // Voorkomt dat de Rigidbody vanzelf roteert.
     }
 
@@ -117,7 +136,7 @@ public class SpaceShipAI : MonoBehaviour
             rb.rotation = startingGridPosition.rotation;
         }
 
-        hasStarted = true; // Laat weten dat de opponent gestart is.
+        hasStarted = true;
     }
 
     private void CreateIndividualPerformance()
@@ -128,17 +147,25 @@ public class SpaceShipAI : MonoBehaviour
         ); // Maakt een willekeurige prestatie.
 
         actualMaxSpeed = maxSpeed * skill * variation;
-        actualAcceleration =
-            acceleration * skill * Random.Range(0.95f, 1.05f);
-        actualBraking =
-            braking * Random.Range(0.95f, 1.05f);
-        actualCornering =
-            corneringAbility * Random.Range(0.95f, 1.05f);
 
-        racingLineOffset = Random.Range(
-            -randomRacingLineOffset,
-            randomRacingLineOffset
-        ); // Geeft een willekeurige race-lijn.
+        actualAcceleration =
+            acceleration *
+            skill *
+            Random.Range(0.95f, 1.05f);
+
+        actualBraking =
+            braking *
+            Random.Range(0.95f, 1.05f);
+
+        actualCornering =
+            corneringAbility *
+            Random.Range(0.95f, 1.05f);
+
+        racingLineOffset =
+            Random.Range(
+                -randomRacingLineOffset,
+                randomRacingLineOffset
+            ); // Geeft een willekeurige race-lijn.
     }
 
     private void FixedUpdate()
@@ -146,9 +173,11 @@ public class SpaceShipAI : MonoBehaviour
         if (!hasStarted)
             return;
 
-        if (raceFinished) // Controleert of de opponent klaar is.
+        // Als de extra finishronde klaar is,
+        // gaat de opponent terug naar zijn starting block.
+        if (raceFinished)
         {
-            ReturnToStartingGrid(); // Laat de opponent teruggaan naar de startpositie.
+            ReturnToStartingGrid();
             return;
         }
 
@@ -156,9 +185,23 @@ public class SpaceShipAI : MonoBehaviour
             return;
 
         if (overtakeCooldownTimer > 0f)
+        {
             overtakeCooldownTimer -= Time.fixedDeltaTime;
+        }
 
-        UpdateRubberBanding(); // Controleert de rubber banding.
+        // Gefinishte racers kunnen niet meer inhalen.
+        if (!finishLapActive)
+        {
+            UpdateRubberBanding();
+            UpdateBattleTarget();
+        }
+        else
+        {
+            // Tijdens de laatste extra ronde:
+            // geen rubber banding en geen inhalen.
+            targetRacer = null;
+            overtakeTimer = 0f;
+        }
 
         RaceWaypoint waypoint =
             racePath.GetWaypoint(currentWaypoint);
@@ -166,23 +209,29 @@ public class SpaceShipAI : MonoBehaviour
         if (waypoint == null)
             return;
 
-        UpdateBattleTarget(); // Zoekt naar een opponent om in te halen.
-
         Vector3 targetPosition =
             GetTargetPosition(waypoint);
 
         Vector3 direction =
-            targetPosition - rb.position;
+            targetPosition -
+            rb.position;
 
         if (direction.sqrMagnitude < 0.01f)
+        {
             direction = transform.forward;
+        }
         else
+        {
             direction.Normalize();
+        }
 
         Vector3 avoidance =
             GetAvoidanceDirection();
 
-        direction += avoidance * avoidanceStrength;
+        direction +=
+            avoidance *
+            avoidanceStrength;
+
         direction.Normalize();
 
         RotateShip(direction);
@@ -194,19 +243,28 @@ public class SpaceShipAI : MonoBehaviour
             );
 
         UpdateSpeed(desiredSpeed);
+
         MoveShip();
 
         if (HasReachedWaypoint(waypoint))
+        {
             NextWaypoint();
+        }
     }
+
+    // ============================================================
+    // SPEED
+    // ============================================================
 
     private float CalculateDesiredSpeed(
         RaceWaypoint waypoint,
         Vector3 direction)
     {
-        float desiredSpeed = actualMaxSpeed;
+        float desiredSpeed =
+            actualMaxSpeed;
 
-        desiredSpeed *= waypoint.speedMultiplier;
+        desiredSpeed *=
+            waypoint.speedMultiplier;
 
         float turnAngle =
             Vector3.Angle(
@@ -225,11 +283,19 @@ public class SpaceShipAI : MonoBehaviour
             Mathf.Lerp(
                 0.45f,
                 1f,
-                turnFactor * actualCornering
+                turnFactor *
+                actualCornering
             );
 
-        desiredSpeed *= cornerMultiplier;
-        desiredSpeed *= currentRubberBandMultiplier;
+        desiredSpeed *=
+            cornerMultiplier;
+
+        // Tijdens de extra finishronde geen rubber banding.
+        if (!finishLapActive)
+        {
+            desiredSpeed *=
+                currentRubberBandMultiplier;
+        }
 
         return desiredSpeed;
     }
@@ -262,6 +328,10 @@ public class SpaceShipAI : MonoBehaviour
         }
     }
 
+    // ============================================================
+    // RUBBER BANDING
+    // ============================================================
+
     private void UpdateRubberBanding()
     {
         if (!useRubberBanding)
@@ -290,8 +360,11 @@ public class SpaceShipAI : MonoBehaviour
         int position =
             GetRacePosition(racers);
 
-        bool isFirst = position == 1;
-        bool isLast = position == racers.Length;
+        bool isFirst =
+            position == 1;
+
+        bool isLast =
+            position == racers.Length;
 
         if (rubberBandState != 0)
         {
@@ -305,13 +378,15 @@ public class SpaceShipAI : MonoBehaviour
                 return;
             }
 
-            if (rubberBandState == 1 && isFirst)
+            if (rubberBandState == 1 &&
+                isFirst)
             {
                 ApplyCurrentRubberBandState();
                 return;
             }
 
-            if (rubberBandState == 2 && isLast)
+            if (rubberBandState == 2 &&
+                isLast)
             {
                 ApplyCurrentRubberBandState();
                 return;
@@ -331,6 +406,7 @@ public class SpaceShipAI : MonoBehaviour
             {
                 if (isFirst)
                     rubberBandState = 1;
+
                 else if (isLast)
                     rubberBandState = 2;
 
@@ -351,12 +427,17 @@ public class SpaceShipAI : MonoBehaviour
         float targetMultiplier = 1f;
 
         if (rubberBandState == 1)
+        {
             targetMultiplier =
-                1f - firstPlaceSpeedReduction;
-
+                1f -
+                firstPlaceSpeedReduction;
+        }
         else if (rubberBandState == 2)
+        {
             targetMultiplier =
-                1f + lastPlaceSpeedBoost;
+                1f +
+                lastPlaceSpeedBoost;
+        }
 
         currentRubberBandMultiplier =
             Mathf.Lerp(
@@ -367,7 +448,8 @@ public class SpaceShipAI : MonoBehaviour
             );
     }
 
-    private int GetRacePosition(GameObject[] racers)
+    private int GetRacePosition(
+        GameObject[] racers)
     {
         float myProgress =
             GetRaceProgress();
@@ -385,15 +467,27 @@ public class SpaceShipAI : MonoBehaviour
             if (other == null)
                 continue;
 
+            // Gefinishte racers worden niet meer
+            // meegenomen in de normale positie.
+            if (other.HasFinished())
+                continue;
+
             float otherProgress =
                 other.GetRaceProgress();
 
-            if (otherProgress > myProgress)
+            if (otherProgress >
+                myProgress)
+            {
                 position++;
+            }
         }
 
         return position;
     }
+
+    // ============================================================
+    // RACE PROGRESS
+    // ============================================================
 
     private float GetRaceProgress()
     {
@@ -417,7 +511,8 @@ public class SpaceShipAI : MonoBehaviour
                 waypointCount
             );
 
-        if (current == null || next == null)
+        if (current == null ||
+            next == null)
         {
             return
                 ((currentLap - 1) *
@@ -484,8 +579,15 @@ public class SpaceShipAI : MonoBehaviour
         return raceFinished;
     }
 
+    // ============================================================
+    // OVERTAKING
+    // ============================================================
+
     private void UpdateBattleTarget()
     {
+        if (finishLapActive)
+            return;
+
         if (overtakeTimer > 0f)
         {
             overtakeTimer -=
@@ -500,7 +602,8 @@ public class SpaceShipAI : MonoBehaviour
         GameObject closest =
             FindClosestRacerAhead();
 
-        targetRacer = closest;
+        targetRacer =
+            closest;
 
         if (targetRacer == null)
             return;
@@ -511,7 +614,8 @@ public class SpaceShipAI : MonoBehaviour
                 targetRacer.transform.position
             );
 
-        if (distance <= overtakingDistance)
+        if (distance <=
+            overtakingDistance)
         {
             overtakeSide =
                 Random.value > 0.5f
@@ -553,6 +657,10 @@ public class SpaceShipAI : MonoBehaviour
             if (other == null)
                 continue;
 
+            // Gefinishte racers mogen niet meer worden ingehaald.
+            if (other.HasFinished())
+                continue;
+
             float otherProgress =
                 other.GetRaceProgress();
 
@@ -573,15 +681,23 @@ public class SpaceShipAI : MonoBehaviour
                     racer.transform.position
                 );
 
-            if (distance < closestDistance)
+            if (distance <
+                closestDistance)
             {
-                closestDistance = distance;
-                closest = racer;
+                closestDistance =
+                    distance;
+
+                closest =
+                    racer;
             }
         }
 
         return closest;
     }
+
+    // ============================================================
+    // TARGET POSITION
+    // ============================================================
 
     private Vector3 GetTargetPosition(
         RaceWaypoint waypoint)
@@ -594,7 +710,9 @@ public class SpaceShipAI : MonoBehaviour
 
         if (trackDirection.sqrMagnitude <
             0.01f)
+        {
             return waypointPosition;
+        }
 
         trackDirection.Normalize();
 
@@ -612,7 +730,9 @@ public class SpaceShipAI : MonoBehaviour
 
         if (distanceToWaypoint <=
             waypointSafetyDistance)
+        {
             return waypointPosition;
+        }
 
         Vector3 side =
             Vector3.Cross(
@@ -623,7 +743,8 @@ public class SpaceShipAI : MonoBehaviour
         float offset =
             racingLineOffset;
 
-        if (overtakeTimer > 0f &&
+        if (!finishLapActive &&
+            overtakeTimer > 0f &&
             targetRacer != null)
         {
             float safetyFactor =
@@ -655,7 +776,8 @@ public class SpaceShipAI : MonoBehaviour
 
         Vector3 target =
             waypointPosition +
-            side * offset;
+            side *
+            offset;
 
         float maxTargetDistance =
             Mathf.Max(
@@ -674,7 +796,8 @@ public class SpaceShipAI : MonoBehaviour
         {
             target =
                 waypointPosition +
-                (target - waypointPosition)
+                (target -
+                 waypointPosition)
                 .normalized *
                 maxTargetDistance;
         }
@@ -700,7 +823,9 @@ public class SpaceShipAI : MonoBehaviour
 
         if (current == null ||
             next == null)
+        {
             return transform.forward;
+        }
 
         Vector3 direction =
             next.transform.position -
@@ -708,10 +833,16 @@ public class SpaceShipAI : MonoBehaviour
 
         if (direction.sqrMagnitude <
             0.01f)
+        {
             return transform.forward;
+        }
 
         return direction.normalized;
     }
+
+    // ============================================================
+    // WAYPOINT
+    // ============================================================
 
     private bool HasReachedWaypoint(
         RaceWaypoint waypoint) // Controleert of het ruimteschip het waypoint heeft bereikt.
@@ -727,7 +858,9 @@ public class SpaceShipAI : MonoBehaviour
 
         if (distance <=
             waypoint.reachDistance) // Als het schip binnen de reachDistance is, is het waypoint bereikt.
+        {
             return true;
+        }
 
         if (distance <=
             waypoint.reachDistance * 1.5f) // Extra controle als het schip iets verder van het waypoint is.
@@ -746,14 +879,20 @@ public class SpaceShipAI : MonoBehaviour
                     ); // Controleert of het schip richting het waypoint kijkt.
 
                 if (dot > 0.1f) // Als het schip richting het waypoint kijkt, telt het als bereikt.
+                {
                     return true;
+                }
             }
         }
 
         return false; // Het waypoint is nog niet bereikt.
     }
 
-    private Vector3 GetAvoidanceDirection() // zorgt ervoor dat de opponents elkaar niet beuken en uitwijken als ze dichtbij komen.
+    // ============================================================
+    // COLLISION AVOIDANCE
+    // ============================================================
+
+    private Vector3 GetAvoidanceDirection()
     {
         GameObject[] racers =
             GameObject.FindGameObjectsWithTag(
@@ -795,11 +934,18 @@ public class SpaceShipAI : MonoBehaviour
         return avoidance; // Geeft de richting terug waarin de opponent moet uitwijken.
     }
 
-    private void RotateShip(Vector3 direction) // zorgt ervoor dat de opponent roteert.
+    // ============================================================
+    // MOVEMENT
+    // ============================================================
+
+    private void RotateShip(
+        Vector3 direction) // zorgt ervoor dat de opponent roteert.
     {
         if (direction.sqrMagnitude <
             0.01f)
+        {
             return;
+        }
 
         Quaternion targetRotation =
             Quaternion.LookRotation(
@@ -839,6 +985,10 @@ public class SpaceShipAI : MonoBehaviour
         }
     }
 
+    // ============================================================
+    // LAP / FINISH
+    // ============================================================
+
     private void NextWaypoint() // checkt naar welke waypoint hij moet. finished de race als het klaar is.
     {
         currentWaypoint++; // Gaat naar de volgende waypoint.
@@ -849,27 +999,86 @@ public class SpaceShipAI : MonoBehaviour
             currentWaypoint = 0; // Gaat terug naar de eerste waypoint.
             currentLap++; // Gaat naar de volgende ronde.
 
-            if (currentLap > totalLaps) // Controleert of alle rondes klaar zijn.
-                FinishRace(); // Beëindigt de race.
+            // ------------------------------------------------
+            // NORMALE RACE KLAAR
+            // ------------------------------------------------
+
+            if (!finishLapActive &&
+                currentLap > totalLaps)
+            {
+                StartFinishLap();
+            }
+
+            // ------------------------------------------------
+            // EXTRA FINISHRONDE KLAAR
+            // ------------------------------------------------
+
+            else if (finishLapActive &&
+                     currentLap >
+                     totalLaps + 1)
+            {
+                FinishRace();
+            }
         }
     }
 
-    private void FinishRace() // zorgt ervoor dat de speler finished. RaceManager.cs gebruikt dit.
+    private void StartFinishLap()
     {
-        raceFinished = true; // Zet de race van deze opponent op finished.
-        currentSpeed = 0f; // Zet de snelheid op nul.
-        targetRacer = null; // Verwijdert het huidige doelwit.
-        overtakeTimer = 0f; // Stopt de inhaalactie.
+        // De AI heeft zijn normale race voltooid.
+        // Hij krijgt nu nog één extra volledige ronde.
 
-        if (rb != null) // Controleert of er een Rigidbody is.
+        finishLapActive = true;
+
+        finishLapStartWaypoint =
+            currentWaypoint;
+
+        // Geen inhaalactie meer.
+        targetRacer = null;
+        overtakeTimer = 0f;
+        overtakeCooldownTimer = 0f;
+
+        // Geen rubber banding meer.
+        rubberBandState = 0;
+        positionTimer = 0f;
+        activeEffectTimer = 0f;
+        currentRubberBandMultiplier = 1f;
+
+        Debug.Log(
+            gameObject.name +
+            " heeft de race gefinisht en rijdt nog 1 extra ronde."
+        );
+    }
+
+    private void FinishRace() // zorgt ervoor dat de opponent finished. RaceManager.cs gebruikt dit.
+    {
+        raceFinished = true;
+
+        finishLapActive = false;
+
+        currentSpeed = 0f;
+
+        targetRacer = null;
+
+        overtakeTimer = 0f;
+
+        if (rb != null)
         {
             rb.linearVelocity =
-                Vector3.zero; // Stopt de beweging.
+                Vector3.zero;
 
             rb.angularVelocity =
-                Vector3.zero; // Stopt het draaien.
+                Vector3.zero;
         }
+
+        Debug.Log(
+            gameObject.name +
+            " is volledig klaar en gaat terug naar zijn starting block."
+        );
     }
+
+    // ============================================================
+    // RETURN TO GRID
+    // ============================================================
 
     private void ReturnToStartingGrid() // hiermee gaat de Opponent terug naar zijn starting point.
     {
@@ -903,6 +1112,7 @@ public class SpaceShipAI : MonoBehaviour
                 );
 
             rb.MoveRotation(rotation);
+
             return;
         }
 
@@ -933,11 +1143,17 @@ public class SpaceShipAI : MonoBehaviour
     private void StopShip()
     {
         currentSpeed = 0f;
+
         rb.linearVelocity =
             Vector3.zero;
+
         rb.angularVelocity =
             Vector3.zero;
     }
+
+    // ============================================================
+    // GIZMOS
+    // ============================================================
 
     private void OnDrawGizmosSelected() // Laat zien welke Waypoint de opponent wilt bereiken.
     {
@@ -947,34 +1163,34 @@ public class SpaceShipAI : MonoBehaviour
             RaceWaypoint waypoint =
                 racePath.GetWaypoint(
                     currentWaypoint
-                ); // Haalt de huidige waypoint op.
+                );
 
-            if (waypoint != null) // Controleert of de waypoint bestaat.
+            if (waypoint != null)
             {
                 Gizmos.color =
-                    Color.red; // Maakt de Gizmo rood.
+                    Color.red;
 
                 Gizmos.DrawLine(
                     transform.position,
                     waypoint.transform.position
-                ); // Laat een lijn naar het waypoint zien.
+                );
 
                 Gizmos.DrawWireSphere(
                     transform.position,
                     battleDistance
-                ); // Laat de battle afstand zien.
+                );
             }
         }
 
-        if (startingGridPosition != null) // Controleert of er een startpositie is.
+        if (startingGridPosition != null)
         {
             Gizmos.color =
-                Color.green; // Maakt de Gizmo groen.
+                Color.green;
 
             Gizmos.DrawWireSphere(
                 startingGridPosition.position,
                 gridReachDistance
-            ); // Laat de afstand van de startpositie zien.
+            );
         }
     }
 }
