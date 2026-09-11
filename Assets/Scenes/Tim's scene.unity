@@ -479,9 +479,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raceManager: {fileID: 1984216619}
   leaderboardPanel: {fileID: 78121668}
-  rowHeight: 45
-  rowSpacing: 160
-  fontSize: 160
+  rowHeight: -25.8
+  rowSpacing: 236.4
+  fontSize: 132
   normalTextColor: {r: 0, g: 0.95065093, b: 1, a: 1}
   firstPlaceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   secondPlaceColor: {r: 0.76729554, g: 0.76729554, b: 0.76729554, a: 1}
@@ -5690,7 +5690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 1
+  totalLaps: 3
 --- !u!4 &1374862048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5792948270604707783, guid: aa9a994f0490a754c91a3e8cd2ea518b, type: 3}
@@ -8076,7 +8076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findOpponentsAutomatically: 1
-  totalLaps: 1
+  totalLaps: 3
   player: {fileID: 1374862047}
   racers: []
 --- !u!4 &1984216620
