@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/scene Justin.unity
+    guid: 39ac24d16baedd749b206d5c10052420
+  - enabled: 1
     path: Assets/Scenes/Tim's scene.unity
     guid: 6c97a2233fb3a874eb6dd2d8de080b83
   m_configObjects: {}
