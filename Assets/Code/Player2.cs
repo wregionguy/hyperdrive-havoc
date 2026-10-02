@@ -13,6 +13,8 @@ public class Player2 : MonoBehaviour
     private float inputForward;
     private float inputTurn;
 
+    public RaceCountdown RaceCountdown;
+
     // Update is called once per frame: capture input here
     void Update()
     {
@@ -23,9 +25,12 @@ public class Player2 : MonoBehaviour
     // FixedUpdate is used for physics
     void FixedUpdate()
     {
-        HandleRotation();
-        HandleMovement();
-        DampLateralVelocity();
+        if (RaceCountdown.showGoText == true)
+        {
+            HandleRotation();
+            HandleMovement();
+            DampLateralVelocity();
+        }
     }
 
     private void HandleRotation()
