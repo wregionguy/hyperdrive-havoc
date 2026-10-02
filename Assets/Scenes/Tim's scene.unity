@@ -332,14 +332,14 @@ RectTransform:
   m_GameObject: {fileID: 78121667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.29964757, y: 0.28184265, z: 0.62877}
+  m_LocalScale: {x: 0.31454006, y: 0.33451906, z: 0.62877}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1495559788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -667, y: 384}
+  m_AnchoredPosition: {x: -643, y: 323}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &78121669
@@ -357,8 +357,8 @@ MonoBehaviour:
   raceManager: {fileID: 1984216619}
   leaderboardPanel: {fileID: 78121668}
   rowHeight: -25.8
-  rowSpacing: 236.4
-  fontSize: 132
+  rowSpacing: 173.9
+  fontSize: 129
   normalTextColor: {r: 0, g: 0.95065093, b: 1, a: 1}
   firstPlaceColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   secondPlaceColor: {r: 0.76729554, g: 0.76729554, b: 0.76729554, a: 1}
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78121667}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2422,7 +2422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 484}
+  m_AnchoredPosition: {x: 0, y: 446}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &617772278
