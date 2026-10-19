@@ -9005,9 +9005,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!54 &4904244510771027130
 Rigidbody:
@@ -9055,9 +9055,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!54 &4904244511372541508
 Rigidbody:
@@ -9105,9 +9105,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!54 &4904244512010487776
 Rigidbody:
@@ -9155,9 +9155,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!54 &4904244512136031966
 Rigidbody:
@@ -9205,9 +9205,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!54 &4904244512184789504
 Rigidbody:
@@ -9255,9 +9255,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!1001 &4913204138873991674
 PrefabInstance:
@@ -10542,9 +10542,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.92
-  m_Height: 2.320073
-  m_Direction: 1
+  m_Radius: 2
+  m_Height: 10
+  m_Direction: 2
   m_Center: {x: 0, y: 0.3547311, z: -4.98}
 --- !u!1001 &6304638023542932595
 PrefabInstance:
