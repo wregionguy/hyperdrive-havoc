@@ -2303,6 +2303,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2654744518145965089, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
+      propertyPath: moveSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654744518145965089, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
+      propertyPath: rotateSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2654744518145965089, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
       propertyPath: RaceCountdown
       value: 
       objectReference: {fileID: 810947877}
