@@ -1334,7 +1334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceManager: {fileID: 1984216619}
-  player: {fileID: 0}
+  player: {fileID: 2147422484}
   lapText: {fileID: 512299698}
 --- !u!1 &530864650
 GameObject:
@@ -2354,6 +2354,10 @@ PrefabInstance:
       propertyPath: racePath
       value: 
       objectReference: {fileID: 2145978685}
+    - target: {fileID: 8683347138244542341, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
+      propertyPath: totalLaps
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2402,7 +2406,7 @@ MonoBehaviour:
   goColor: {r: 0, g: 1, b: 0, a: 1}
   fontSize: 100
   raceManager: {fileID: 1984216619}
-  player: {fileID: 0}
+  player: {fileID: 2147422484}
 --- !u!4 &810947878
 Transform:
   m_ObjectHideFlags: 0
@@ -5334,8 +5338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findOpponentsAutomatically: 1
-  totalLaps: 3
-  player: {fileID: 0}
+  totalLaps: 1
+  player: {fileID: 2147422484}
   racers:
   - {fileID: 2491039344825351021}
   - {fileID: 548285549564479589}
@@ -5899,6 +5903,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5624234075019511101, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
   m_PrefabInstance: {fileID: 799023553}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2147422484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8683347138244542341, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
+  m_PrefabInstance: {fileID: 799023553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7442249085758744b9c89dda71a1fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &184078634264080133
 GameObject:
   m_ObjectHideFlags: 0
@@ -5962,7 +5977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 4793569973157137225}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -6005,7 +6020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 4793569973278109630}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -6048,7 +6063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 4793569973560886674}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -6091,7 +6106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 4793569972213058169}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -6145,7 +6160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 4793569972743048126}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -6188,7 +6203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 4793569972932908545}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -6638,7 +6653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 7461404263822365364}
   gridReachDistance: 3
   gridMoveSpeed: 20
@@ -8405,7 +8420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 8190154160342358778}
   gridReachDistance: 2
   gridMoveSpeed: 20
@@ -8448,7 +8463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 8190154160412089892}
   gridReachDistance: 2
   gridMoveSpeed: 20
@@ -8491,7 +8506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 8190154160080464030}
   gridReachDistance: 2
   gridMoveSpeed: 20
@@ -8534,7 +8549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 8190154159751795453}
   gridReachDistance: 2
   gridMoveSpeed: 20
@@ -8577,7 +8592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 8190154159612676704}
   gridReachDistance: 2
   gridMoveSpeed: 20
@@ -10032,7 +10047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 2145978685}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 1
   startingGridPosition: {fileID: 7489500674849593692}
   gridReachDistance: 2
   gridMoveSpeed: 20
@@ -10600,6 +10615,10 @@ PrefabInstance:
       propertyPath: racePath
       value: 
       objectReference: {fileID: 2145978685}
+    - target: {fileID: 2687725383518615468, guid: 5251bcb882635fc4da272e6d5952598f, type: 3}
+      propertyPath: totalLaps
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2687725383518615468, guid: 5251bcb882635fc4da272e6d5952598f, type: 3}
       propertyPath: startingGridPosition
       value: 
@@ -12084,6 +12103,10 @@ PrefabInstance:
       propertyPath: racePath
       value: 
       objectReference: {fileID: 2145978685}
+    - target: {fileID: 3904708353484050471, guid: d8a1b531afdc3fc44ac560e01d72de5a, type: 3}
+      propertyPath: totalLaps
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3904708353484050471, guid: d8a1b531afdc3fc44ac560e01d72de5a, type: 3}
       propertyPath: startingGridPosition
       value: 
