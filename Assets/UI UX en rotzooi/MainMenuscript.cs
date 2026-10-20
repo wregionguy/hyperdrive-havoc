@@ -15,4 +15,12 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+    public void TimeFreeze()
+    {
+        Time.timeScale = 0;
+    }
+    public void TimeContinue()
+    {
+        Time.timeScale = 1;
+    }
 }
