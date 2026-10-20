@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tim's scene.unity
     guid: 6c97a2233fb3a874eb6dd2d8de080b83
+  - enabled: 1
+    path: Assets/Scenes/baan 2.unity
+    guid: 1b1091acabef28a4eb9d9442bac9e31d
+  - enabled: 1
+    path: Assets/Scenes/bbaan 3.unity
+    guid: 82a1d07677e7efe4c972f4eb0279807e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
