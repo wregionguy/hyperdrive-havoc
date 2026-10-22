@@ -58,6 +58,11 @@ public class PlayerRaceController : MonoBehaviour
 
         if (HasReachedWaypoint(waypoint)) // Controleert of de player het waypoint bereikt heeft.
             NextWaypoint(); // Gaat naar het volgende waypoint.
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            FinishRace();
+        }
     }
 
     private bool HasReachedWaypoint(RaceWaypoint waypoint)
