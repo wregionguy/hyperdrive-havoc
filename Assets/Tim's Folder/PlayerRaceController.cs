@@ -74,7 +74,7 @@ public class PlayerRaceController : MonoBehaviour
             NextWaypoint(); // Gaat naar het volgende waypoint.
 
         // Testtoets om de finish te activeren.
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Backspace))
         {
             FinishRace();
         }
