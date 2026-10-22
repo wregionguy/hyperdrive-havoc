@@ -7,6 +7,11 @@ using UnityEngine.VFX;
 
 public class MainMenu : MonoBehaviour
 {
+    public void BackToStart()
+    {
+        SceneManager.LoadScene("Scene Justin");
+        Time.timeScale = 1;
+    }
     public void PlayScene1()
     {
         SceneManager.LoadScene("Tim's scene");
