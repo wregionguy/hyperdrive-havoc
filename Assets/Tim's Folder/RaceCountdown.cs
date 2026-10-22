@@ -1,6 +1,8 @@
+
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RaceCountdown : MonoBehaviour
 {
@@ -13,7 +15,10 @@ public class RaceCountdown : MonoBehaviour
 
     public string goText = "GO!";
 
-    public bool showGoText = false; // Wordt automatisch true nadat de countdown voorbij is.
+    public bool showGoText = false; // Wordt true nadat de countdown voorbij is.
+
+    [Header("Ready Button")]
+    public Button readyButton; // De knop waarmee de speler klaar aangeeft.
 
     [Header("Countdown UI")]
     public TextMeshProUGUI countdownText;
@@ -26,6 +31,7 @@ public class RaceCountdown : MonoBehaviour
     public PlayerRaceController player;
 
     private bool raceStarted;
+    private bool countdownStarted;
 
     public bool RaceStarted
     {
@@ -37,106 +43,97 @@ public class RaceCountdown : MonoBehaviour
         // Zoekt automatisch de RaceManager.
         if (raceManager == null)
         {
-            raceManager =
-                FindFirstObjectByType<RaceManager>();
+            raceManager = FindFirstObjectByType<RaceManager>();
         }
 
         // Zoekt automatisch de Player.
         if (player == null && raceManager != null)
         {
-            player =
-                raceManager.player;
+            player = raceManager.player;
         }
 
-        // Zet de player tijdelijk uit tijdens de countdown.
+        // Zet de player tijdelijk uit tijdens het wachten.
         if (player != null)
         {
             player.enabled = false;
         }
 
         // Zoekt automatisch alle opponents met de tag "Opponent".
-        GameObject[] opponentObjects =
-            GameObject.FindGameObjectsWithTag(
-                "Opponent"
-            );
-
-        foreach (GameObject opponentObject in opponentObjects)
-        {
-            SpaceShipAI ai =
-                opponentObject.GetComponent<SpaceShipAI>();
-
-            if (ai != null)
-            {
-                ai.enabled = false;
-            }
-        }
+        SetOpponentsEnabled(false);
 
         // Zet de countdown tekst klaar.
         if (countdownText != null)
         {
-            countdownText.fontSize =
-                fontSize;
-
-            countdownText.alignment =
-                TextAlignmentOptions.Center;
-
-            countdownText.gameObject.SetActive(true);
-
+            countdownText.fontSize = fontSize;
+            countdownText.alignment = TextAlignmentOptions.Center;
             countdownText.text = "";
+            countdownText.gameObject.SetActive(false);
+        }
+
+        // Verbindt automatisch de Ready-knop.
+        if (readyButton != null)
+        {
+            readyButton.onClick.AddListener(OnReadyButtonPressed);
         }
     }
 
-    private void Start()
+    private void OnDestroy()
     {
-        StartCoroutine(
-            CountdownRoutine()
-        );
+        // Voorkomt dat de listener blijft bestaan.
+        if (readyButton != null)
+        {
+            readyButton.onClick.RemoveListener(OnReadyButtonPressed);
+        }
+    }
+
+    public void OnReadyButtonPressed()
+    {
+        // Voorkomt dat meerdere klikken de countdown opnieuw starten.
+        if (countdownStarted || raceStarted)
+            return;
+
+        countdownStarted = true;
+
+        // Verberg en blokkeer de knop na de eerste klik.
+        if (readyButton != null)
+        {
+            readyButton.interactable = false;
+            readyButton.gameObject.SetActive(false);
+        }
+
+        if (countdownText != null)
+        {
+            countdownText.gameObject.SetActive(true);
+        }
+
+        StartCoroutine(CountdownRoutine());
     }
 
     private IEnumerator CountdownRoutine()
     {
-        float remainingTime =
-            countdownDuration;
+        float remainingTime = countdownDuration;
 
-        // Zorg ervoor dat GO nog niet zichtbaar is.
+        // GO is nog niet actief.
         showGoText = false;
 
         while (remainingTime > 0f)
         {
-            int number =
-                Mathf.CeilToInt(
-                    remainingTime
-                );
+            int number = Mathf.CeilToInt(remainingTime);
 
-            ShowText(
-                number.ToString(),
-                countdownColor
-            );
+            ShowText(number.ToString(), countdownColor);
 
-            yield return new WaitForSeconds(
-                secondsPerNumber
-            );
+            yield return new WaitForSeconds(secondsPerNumber);
 
-            remainingTime -=
-                secondsPerNumber;
+            remainingTime -= secondsPerNumber;
         }
 
         // De countdown is voorbij.
-        // Vanaf hier wordt showGoText automatisch true.
         showGoText = true;
 
-        // Laat GO! zien.
-        if (showGoText)
-        {
-            ShowText(
-                goText,
-                goColor
-            );
+        ShowText(goText, goColor);
 
-            yield return new WaitForSeconds(
-                0.5f
-            );
-        }
+        // Laat GO kort zien.
+        yield return new WaitForSeconds(0.5f);
 
         // Start daarna de race.
         StartRace();
@@ -149,25 +146,10 @@ public class RaceCountdown : MonoBehaviour
 
         raceStarted = true;
 
-        // Zoek opnieuw alle opponents met de tag "Opponent".
-        // Hierdoor hoef je ze nooit handmatig toe te voegen.
-        GameObject[] opponentObjects =
-            GameObject.FindGameObjectsWithTag(
-                "Opponent"
-            );
+        // Activeert alle opponents met de tag "Opponent".
+        SetOpponentsEnabled(true);
 
-        foreach (GameObject opponentObject in opponentObjects)
-        {
-            SpaceShipAI ai =
-                opponentObject.GetComponent<SpaceShipAI>();
-
-            if (ai != null)
-            {
-                ai.enabled = true;
-            }
-        }
-
-        // Start de player.
+        // Start de speler.
         if (player != null)
         {
             player.enabled = true;
@@ -176,28 +158,34 @@ public class RaceCountdown : MonoBehaviour
         // Verberg de countdown.
         if (countdownText != null)
         {
-            countdownText.gameObject.SetActive(
-                false
-            );
+            countdownText.gameObject.SetActive(false);
         }
     }
 
-    private void ShowText(
-        string message,
-        Color color
-    )
+    private void SetOpponentsEnabled(bool value)
+    {
+        // Zoek automatisch alle opponents met de tag "Opponent".
+        GameObject[] opponentObjects =
+            GameObject.FindGameObjectsWithTag("Opponent");
+
+        foreach (GameObject opponentObject in opponentObjects)
+        {
+            SpaceShipAI ai = opponentObject.GetComponent<SpaceShipAI>();
+
+            if (ai != null)
+            {
+                ai.enabled = value;
+            }
+        }
+    }
+
+    private void ShowText(string message, Color color)
     {
         if (countdownText == null)
             return;
 
-        countdownText.gameObject.SetActive(
-            true
-        );
-
-        countdownText.text =
-            message;
-
-        countdownText.color =
-            color;
+        countdownText.gameObject.SetActive(true);
+        countdownText.text = message;
+        countdownText.color = color;
     }
 }
