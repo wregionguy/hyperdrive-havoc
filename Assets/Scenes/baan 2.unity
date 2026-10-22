@@ -1404,6 +1404,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6893233924859105764, guid: 2c59f401721d8eb438695473916b52c6, type: 3}
   m_PrefabInstance: {fileID: 31161188}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &352703968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 473795467759867455, guid: 81cb4e03ab384a9498f9577bf4f48dc2, type: 3}
+  m_PrefabInstance: {fileID: 1695304218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &394680979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1949,7 +1954,7 @@ PrefabInstance:
       objectReference: {fileID: 802005528}
     - target: {fileID: 4991848465079197575, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
       propertyPath: m_Name
-      value: Player Spaceship
+      value: 'Player '
       objectReference: {fileID: 0}
     - target: {fileID: 5624234075019511101, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6543,6 +6548,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BackToStart
       objectReference: {fileID: 0}
+    - target: {fileID: 8715299486052716701, guid: 09328e11d1486504885d81af89a08d65, type: 3}
+      propertyPath: IngameCanvas
+      value: 
+      objectReference: {fileID: 352703968}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1696525134990064572, guid: 09328e11d1486504885d81af89a08d65, type: 3}

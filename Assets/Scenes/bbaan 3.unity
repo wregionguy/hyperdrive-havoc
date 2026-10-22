@@ -4418,6 +4418,14 @@ PrefabInstance:
       propertyPath: totalLaps
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8683347138244542341, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
+      propertyPath: autoDriveSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683347138244542341, guid: a5c074db48e72bb41a3beac8544be194, type: 3}
+      propertyPath: autoDriveTurnSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7943,6 +7951,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BackToStart
       objectReference: {fileID: 0}
+    - target: {fileID: 7807229150112490740, guid: 09328e11d1486504885d81af89a08d65, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: StartTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715299486052716701, guid: 09328e11d1486504885d81af89a08d65, type: 3}
+      propertyPath: IngameCanvas
+      value: 
+      objectReference: {fileID: 2047599543}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8658,6 +8674,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 249530645253101826, guid: 5c884771d73f1aa4bbdd94da7a1d6d21, type: 3}
   m_PrefabInstance: {fileID: 589201432}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2047599543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 473795467759867455, guid: 81cb4e03ab384a9498f9577bf4f48dc2, type: 3}
+  m_PrefabInstance: {fileID: 2113748604}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2071750531 stripped
 Transform:

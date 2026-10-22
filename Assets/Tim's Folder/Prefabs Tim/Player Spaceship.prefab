@@ -187,15 +187,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129a965b6fab1bc43ae356dbdfb18c15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 176.285
+      value: 581.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129a965b6fab1bc43ae356dbdfb18c15, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.225
+      value: 44.179
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129a965b6fab1bc43ae356dbdfb18c15, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -235.401
+      value: 506.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129a965b6fab1bc43ae356dbdfb18c15, type: 3}
       propertyPath: m_LocalRotation.w
@@ -316,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32253864ba266846a9e6915ed71eb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotateSpeed: 130
+  moveSpeed: 9
+  rotateSpeed: 60
   lateralDamping: 5
   rb: {fileID: 4297778926744170341}
   RaceCountdown: {fileID: 0}
@@ -335,7 +335,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePath: {fileID: 0}
   startingWaypoint: 0
-  totalLaps: 3
+  totalLaps: 2
+  autoDriveAfterFinish: 1
+  autoDriveSpeed: 15
+  autoDriveTurnSpeed: 1
+  autoDriveReachDistance: 3
 --- !u!136 &6654028885054313435
 CapsuleCollider:
   m_ObjectHideFlags: 0

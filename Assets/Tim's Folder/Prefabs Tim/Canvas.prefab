@@ -605,8 +605,8 @@ MonoBehaviour:
   playerTextColor: {r: 0.836478, g: 0.23936933, b: 0.24844688, a: 1}
   finishedNameColor: {r: 0, g: 1, b: 0, a: 1}
   centerAfterPlayerFinishes: 1
-  finishedLeaderboardPosition: {x: 0, y: 210}
-  finishedLeaderboardScale: 1.5
+  finishedLeaderboardPosition: {x: 0, y: 220}
+  finishedLeaderboardScale: 1.4
 --- !u!1 &7561940746834027086
 GameObject:
   m_ObjectHideFlags: 0

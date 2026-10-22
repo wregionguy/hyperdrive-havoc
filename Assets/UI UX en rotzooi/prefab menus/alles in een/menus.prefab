@@ -101,6 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuscript: {fileID: 605411061212588561}
   menu: {fileID: 3986046867018614854}
+  IngameCanvas: {fileID: 0}
+  SettingsMenu: {fileID: 4661617896420169973}
   menuActive: 0
 --- !u!1001 &2150325075939794930
 PrefabInstance:
@@ -248,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8182940258321971974, guid: 1e57e8dc4cc353940b393517b6cd7eca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: Start
+      value: StartTime
       objectReference: {fileID: 0}
     - target: {fileID: 8182940258321971974, guid: 1e57e8dc4cc353940b393517b6cd7eca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -340,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 605411061212588561}
     - target: {fileID: 9093226312959822720, guid: 1e57e8dc4cc353940b393517b6cd7eca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: BackToStart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
